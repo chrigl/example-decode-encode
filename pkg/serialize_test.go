@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestEncode(t *testing.T) {
+func TestEncodeDecode(t *testing.T) {
 	tests := []struct {
 		input  Foo
 		expect string
@@ -32,29 +32,10 @@ func TestEncode(t *testing.T) {
 			if got != tt.expect {
 				t.Errorf("want: %s, got: %s", tt.expect, got)
 			}
-		})
-	}
-}
 
-func TestDecode(t *testing.T) {
-	tests := []struct {
-		input  string
-		expect Foo
-	}{
-		{
-			input: "hello_world",
-			expect: Foo{
-				Name:  "hello",
-				Space: "world",
-			},
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.input, func(t *testing.T) {
-			got := Decode(tt.input)
-			if *got != tt.expect {
-				t.Errorf("want: %+v, go: %+v", tt.expect, got)
+			back := Decode(got)
+			if *back != tt.input {
+				t.Errorf("unable to Decode back. want: %+v, got: %+v", tt.input, back)
 			}
 		})
 	}
