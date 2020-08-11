@@ -25,8 +25,13 @@ func Encode(f *Foo) string {
 
 func Decode(data string) *Foo {
 	tmp := strings.Split(data, "_")
+	var newField string
+	if len(tmp) == 3 {
+		newField = tmp[2]
+	}
 	return &Foo{
-		Name:  tmp[0],
-		Space: tmp[1],
+		Name:     tmp[0],
+		Space:    tmp[1],
+		NewField: newField,
 	}
 }
