@@ -1,17 +1,26 @@
 package pkg
 
 import (
-	"fmt"
 	"strings"
 )
 
 type Foo struct {
 	Name  string
 	Space string
+
+	NewField string
 }
 
 func Encode(f *Foo) string {
-	return fmt.Sprintf("%s_%s", f.Name, f.Space)
+	var sb strings.Builder
+	sb.WriteString(f.Name)
+	sb.WriteString("_")
+	sb.WriteString(f.Space)
+	if f.NewField != "" {
+		sb.WriteString("_")
+		sb.WriteString(f.NewField)
+	}
+	return sb.String()
 }
 
 func Decode(data string) *Foo {

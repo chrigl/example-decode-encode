@@ -16,6 +16,14 @@ func TestEncode(t *testing.T) {
 			},
 			expect: "hello_world",
 		},
+		{
+			input: Foo{
+				Name:     "hello",
+				Space:    "world",
+				NewField: "bar",
+			},
+			expect: "hello_world_bar",
+		},
 	}
 
 	for _, tt := range tests {
